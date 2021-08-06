@@ -5,13 +5,13 @@
         "type": "header",
         "settings": {
           "logo_max_width": 90,
-          "main_menu": "",
+          "main_menu": "1",
           "enable_secondary_background": true,
           "show_search": false,
           "announcement_bar_enabled": true,
           "announcement_bar_text": "Announce something here",
           "announcement_bar_url": "",
-          "announcement_bar_color_background": "#FAF3EC",
+          "announcement_bar_color_background": "#faf3ec",
           "announcement_bar_color_text": "#000000"
         }
       },
@@ -157,9 +157,9 @@
         ],
         "settings": {
           "show_payment_icons": false,
-          "color_footer_background": "#FAF3EC",
+          "color_footer_background": "#faf3ec",
           "color_footer_heading_text": "#000000",
-          "color_footer_body_text": "#746B60",
+          "color_footer_body_text": "#746b60",
           "show_locale_selector": true
         }
       },
