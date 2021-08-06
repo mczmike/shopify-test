@@ -1,0 +1,724 @@
+<section class="multi-column{% if section.settings.enable_secondary_background %} multi-column--secondary-background secondary-background{% endif %}">
+  <div class="multi-column__inner">
+    {%- if section.blocks.size > 0 -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="multi-column__title h4 center">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      <div class="multi-column-blocks{% if section.blocks.size > 0 %} grid grid--{{ section.blocks.size }}-col-tablet{% endif %}{% if section.settings.mobile_layout == 'grid' %} grid--2-col multi-column-blocks--2-col{% endif %}{% if section.settings.alignment == 'center' %} center{% endif %}">
+        {%- for block in section.blocks -%}
+          <div class="multi-column-blocks__item grid__item{% if section.settings.mobile_layout == 'stack' %} multi-column-blocks__item--stacked{% endif %}"> 
+            {%- if block.settings.image != blank -%}
+              <div class="multi-column__media media{% if section.settings.image_size == 'small' %} multi-column__media--small{% endif %}{% unless section.settings.keep_image_ratio %} media--square multi-column__media--square{% endunless %}{% if section.settings.alignment == 'center' %} media--centered{% endif %}">
+                <img srcset="
+                    {%- if block.settings.image.width >= 120 -%}{{ block.settings.image | img_url: '120x' }} 120w,{%- endif -%}
+                    {%- if block.settings.image.width >= 240 -%}{{ block.settings.image | img_url: '240x' }} 240w,{%- endif -%}
+                    {%- if block.settings.image.width >= 311 -%}{{ block.settings.image | img_url: '311x' }} 311w,{%- endif -%}
+                    {%- if block.settings.image.width >= 622 -%}{{ block.settings.image | img_url: '622x' }} 622w,{%- endif -%}
+                    {%- if block.settings.image.width >= 720 -%}{{ block.settings.image | img_url: '720x' }} 720w,{%- endif -%}
+                    {%- if block.settings.image.width >= 1440 -%}{{ block.settings.image | img_url: '1440x' }} 1440w{%- endif -%}"
+                  sizes="
+                    (min-width: 750px){% if section.settings.image_size == 'small' %} 311px{% else %} 720px{% endif %},{% if section.settings.image_size == 'small' %} 120px{% else %} calc(100vw - 6.4rem){% endif %}"
+                  src="{{ block.settings.image | img_url: '503x503' }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy"
+                  alt="{{ block.settings.image.alt | escape }}">
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="multi-column__heading{% if section.blocks.size == 1 %} h1{% else %} h2{% endif %}">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div class="multi-column__text rte{% if section.blocks.size == 1 %} multi-column__text--large{% endif %}">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
+        <div class="center">
+          <a href="{{ section.settings.button_url }}" class="button">{{ section.settings.button_label | escape }}</a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": {
+    "cs": "Více sloupců",
+    "da": "Flere kolonner",
+    "de": "Mehrere Spalten",
+    "en": "Multi-column",
+    "es": "Multicolumna",
+    "fi": "Monisarakkeinen",
+    "fr": "Multicolonnes",
+    "it": "Multicolonna",
+    "ja": "複数列",
+    "ko": "여러 칼럼",
+    "nb": "Flere kolonner",
+    "nl": "Meerdere kolommen",
+    "pl": "Wielokolumnowy",
+    "pt-BR": "Várias colunas",
+    "pt-PT": "Várias colunas",
+    "sv": "Flera kolumner",
+    "th": "หลายคอลัมน์",
+    "tr": "Çok sütunlu",
+    "vi": "Nhiều cột",
+    "zh-CN": "多列",
+    "zh-TW": "多欄位"
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "cs": "Nadpis",
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsikko",
+        "fr": "En-tête",
+        "it": "Titolo",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pl": "Nagłówek",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "หัวเรื่อง",
+        "tr": "Başlık",
+        "vi": "Tiêu đề",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "cs": "Více sloupců",
+        "da": "Flere kolonner",
+        "de": "Mehrere Spalten",
+        "en": "Multi-column",
+        "es": "Multicolumna",
+        "fi": "Monisarakkeinen",
+        "fr": "Multicolonnes",
+        "it": "Multicolonna",
+        "ja": "複数列",
+        "ko": "여러 칼럼",
+        "nb": "Flere kolonner",
+        "nl": "Meerdere kolommen",
+        "pl": "Wielokolumnowy",
+        "pt-BR": "Várias colunas",
+        "pt-PT": "Várias colunas",
+        "sv": "Flera kolumner",
+        "th": "หลายคอลัมน์",
+        "tr": "Çok sütunlu",
+        "vi": "Nhiều cột",
+        "zh-CN": "多列",
+        "zh-TW": "多欄位"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Schaltflächenbeschriftung",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": {
+        "cs": "Tlačítkový odkaz",
+        "da": "Knaplink",
+        "de": "Schaltflächenlink",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Knappekobling",
+        "nl": "Knoplink",
+        "pl": "Link przycisku",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "tr": "Düğme bağlantısı",
+        "vi": "Liên kết trên nút",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
+    },
+    {
+      "type": "header",
+      "content": {
+        "cs": "Možnosti rozvržení",
+        "da": "Layoutindstillinger",
+        "de": "Layout-Optionen",
+        "en": "Layout options",
+        "es": "Opciones de diseño",
+        "fi": "Pohjan asetukset",
+        "fr": "Options de mise en page",
+        "it": "Opzioni layout",
+        "ja": "レイアウトオプション",
+        "ko": "레이아웃 옵션",
+        "nb": "Alternativer for layout",
+        "nl": "Opmaak opties",
+        "pl": "Opcje układu",
+        "pt-BR": "Opções de layout",
+        "pt-PT": "Opções de esquema",
+        "sv": "Layout-alternativ",
+        "th": "ตัวเลือกเลย์เอาต์",
+        "tr": "Düzen seçenekleri",
+        "vi": "Tùy chọn bố cục",
+        "zh-CN": "布局选项",
+        "zh-TW": "版面配置選項"
+      }
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": {
+        "cs": "Zarovnání",
+        "da": "Justering",
+        "de": "Ausrichtung",
+        "en": "Alignment",
+        "es": "Alineación",
+        "fi": "Tasaus",
+        "fr": "Alignement",
+        "it": "Allineamento",
+        "ja": "配置",
+        "ko": "정렬",
+        "nb": "Justering",
+        "nl": "Uitlijning",
+        "pl": "Wyrównanie",
+        "pt-BR": "Alinhamento",
+        "pt-PT": "Alinhamento",
+        "sv": "Justering",
+        "th": "การจัดแนว",
+        "tr": "Hizalama",
+        "vi": "Căn chỉnh",
+        "zh-CN": "对齐方式",
+        "zh-TW": "對齊"
+      },
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": {
+            "cs": "Doleva",
+            "da": "Venstre",
+            "de": "Links",
+            "en": "Left",
+            "es": "Izquierda",
+            "fi": "Vasen",
+            "fr": "Gauche",
+            "it": "A sinistra",
+            "ja": "左",
+            "ko": "왼쪽",
+            "nb": "Venstre",
+            "nl": "Links",
+            "pl": "Lewa strona",
+            "pt-BR": "Esquerda",
+            "pt-PT": "Esquerda",
+            "sv": "Vänster",
+            "th": "ซ้าย",
+            "tr": "Sol",
+            "vi": "Bên trái",
+            "zh-CN": "左侧",
+            "zh-TW": "靠左"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "cs": "Na střed",
+            "da": "Centreret",
+            "de": "Zentriert",
+            "en": "Center",
+            "es": "Centrar",
+            "fi": "Keskitetty",
+            "fr": "Centre",
+            "it": "Al centro",
+            "ja": "中央",
+            "ko": "중앙",
+            "nb": "Sentrert",
+            "nl": "Midden",
+            "pl": "Do środka",
+            "pt-BR": "Centro",
+            "pt-PT": "Centro",
+            "sv": "Centrera",
+            "th": "กึ่งกลาง",
+            "tr": "Orta",
+            "vi": "Ở giữa",
+            "zh-CN": "居中",
+            "zh-TW": "置中"
+          }
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": {
+        "cs": "Mobilní rozvržení",
+        "da": "Mobillayout",
+        "de": "Mobiles Layout",
+        "en": "Mobile layout",
+        "es": "Diseño móvil",
+        "fi": "Mobiiliasettelu",
+        "fr": "Mise en page pour téléphone portable",
+        "it": "Layout dispositivo mobile",
+        "ja": "モバイルのレイアウト",
+        "ko": "모바일 레이아웃",
+        "nb": "Mobillayout",
+        "nl": "Mobiele opmaak",
+        "pl": "Układ na urządzeniu zdalnym",
+        "pt-BR": "Layout para dispositivo móvel",
+        "pt-PT": "Esquema móvel",
+        "sv": "Mobil layout",
+        "th": "เลย์เอาต์ของมือถือ",
+        "tr": "Mobil düzen",
+        "vi": "Bố cục di động",
+        "zh-CN": "移动布局",
+        "zh-TW": "行動版版面配置"
+      },
+      "default": "stack",
+      "options": [
+        {
+          "value": "stack",
+          "label": {
+            "cs": "Nad sebou",
+            "da": "Stablet",
+            "de": "Gestapelt",
+            "en": "Stacked",
+            "es": "Apilado",
+            "fi": "Päällekkäin",
+            "fr": "Empilé",
+            "it": "Elencato",
+            "ja": "スタックされました",
+            "ko": "누적",
+            "nb": "Stablet",
+            "nl": "Gestapeld",
+            "pl": "Ułożone w stos",
+            "pt-BR": "Empilhado",
+            "pt-PT": "Empilhado",
+            "sv": "Staplade",
+            "th": "ซ้อนกัน",
+            "tr": "Üst üste",
+            "vi": "Đã xếp chồng",
+            "zh-CN": "堆叠",
+            "zh-TW": "已堆疊"
+          }
+        },
+        {
+          "value": "grid",
+          "label": {
+            "cs": "Mřížka",
+            "da": "Gitter",
+            "de": "Raster",
+            "en": "Grid",
+            "es": "Cuadrícula",
+            "fi": "Ruudukko",
+            "fr": "Grille",
+            "it": "Griglia",
+            "ja": "グリッド",
+            "ko": "그리드",
+            "nb": "Rutenett",
+            "nl": "Grid",
+            "pl": "Siatka",
+            "pt-BR": "Grade",
+            "pt-PT": "Grelha",
+            "sv": "Rutnät",
+            "th": "กริด",
+            "tr": "Izgara",
+            "vi": "Lưới",
+            "zh-CN": "网格",
+            "zh-TW": "網格"
+          }
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": {
+        "cs": "Velikost obrázku",
+        "da": "Billedets størrelse",
+        "de": "Bildgröße",
+        "en": "Image size",
+        "es": "Tamaño de la imagen",
+        "fi": "Kuvan koko",
+        "fr": "Taille de l'image",
+        "it": "Dimensioni immagine",
+        "ja": "画像サイズ",
+        "ko": "이미지 사이즈",
+        "nb": "Bildestørrelse",
+        "nl": "Afbeeldingsformaat",
+        "pl": "Rozmiar obrazu",
+        "pt-BR": "Tamanho da imagem",
+        "pt-PT": "Tamanho da imagem",
+        "sv": "Bildstorlek",
+        "th": "ขนาดรูปภาพ",
+        "tr": "Görsel boyutu",
+        "vi": "Kích cỡ hình ảnh",
+        "zh-CN": "图片尺寸",
+        "zh-TW": "圖片尺寸"
+      },
+      "default": "small",
+      "options": [
+        {
+          "value": "small",
+          "label": {
+            "cs": "Malá",
+            "da": "Lille",
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeño",
+            "fi": "Pieni",
+            "fr": "Petite",
+            "it": "Piccola",
+            "ja": "小",
+            "ko": "작게",
+            "nb": "Liten",
+            "nl": "Klein",
+            "pl": "Mały",
+            "pt-BR": "Pequeno",
+            "pt-PT": "Pequeno",
+            "sv": "Liten",
+            "th": "เล็ก",
+            "tr": "Küçük",
+            "vi": "Nhỏ",
+            "zh-CN": "小",
+            "zh-TW": "小"
+          }
+        },
+        {
+          "value": "large",
+          "label": {
+            "cs": "Velká",
+            "da": "Stor",
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fi": "Suuri",
+            "fr": "Grande",
+            "it": "Grande",
+            "ja": "大",
+            "ko": "크게",
+            "nb": "Stor",
+            "nl": "Groot",
+            "pl": "Duży",
+            "pt-BR": "Grande",
+            "pt-PT": "Grande",
+            "sv": "Stor",
+            "th": "ใหญ่",
+            "tr": "Large",
+            "vi": "Lớn",
+            "zh-CN": "大",
+            "zh-TW": "大"
+          }
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "keep_image_ratio",
+      "label": {
+        "cs": "Zachovat poměr stran obrázku",
+        "da": "Bevar billedforhold",
+        "de": "Bildverhältnis beibehalten",
+        "en": "Keep image ratio",
+        "es": "Mantener relación de aspecto de la imagen",
+        "fi": "Säilytä kuvasuhde",
+        "fr": "Conserver le rapport d'aspect de l'image",
+        "it": "Mantieni proporzioni dell'immagine",
+        "ja": "画像比を維持する",
+        "ko": "이미지 비율 유지",
+        "nb": "Behold bildeforholdet",
+        "nl": "Afbeeldingsverhouding behouden",
+        "pl": "Zachowaj proporcje obrazu",
+        "pt-BR": "Manter proporção da imagem",
+        "pt-PT": "Manter proporções de imagem",
+        "sv": "Behåll bildförhållanden",
+        "th": "รักษาอัตราส่วนรูปภาพ",
+        "tr": "Görsel oranını koru",
+        "vi": "Giữ tỷ lệ hình ảnh",
+        "zh-CN": "保持图片比",
+        "zh-TW": "保留圖片比例"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_secondary_background",
+      "label": {
+        "cs": "Povolit sekundární pozadí a barvu textu",
+        "da": "Aktivér sekundær baggrunds- og tekstfarve",
+        "de": "Sekundäre Hintergrund- und Textfarbe aktivieren",
+        "en": "Enable secondary background and text color",
+        "es": "Activar color de texto y fondo secundario",
+        "fi": "Ota käyttöön toissijainen tausta ja tekstiväri",
+        "fr": "Activer l'arrière-plan secondaire et la couleur du texte",
+        "it": "Abilita sfondo secondario e colore del testo",
+        "ja": "サブ背景とテキストの配色を有効にする",
+        "ko": "보조 배경 및 텍스트 색상 활성화",
+        "nb": "Aktiver sekundærbakgrunn og tekstfarge",
+        "nl": "Secundaire achtergrond en tekstkleur inschakelen",
+        "pl": "Włącz dodatkowe tło i kolor tekstu",
+        "pt-BR": "Habilitar fundo e cor do texto secundários",
+        "pt-PT": "Ativar cor do fundo e do texto secundário",
+        "sv": "Aktivera sekundär bakgrunds- och textfärg",
+        "th": "เปิดใช้พื้นหลังและสีตัวอักษรรอง",
+        "tr": "İkincil arka planı ve metin rengini etkinleştir",
+        "vi": "Bật màu chữ và nền thứ cấp",
+        "zh-CN": "启用辅助背景和文本颜色",
+        "zh-TW": "啟用次要背景和文字顏色"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": {
+        "cs": "Sloupec",
+        "da": "Kolonne",
+        "de": "Spalte",
+        "en": "Column",
+        "es": "Columna",
+        "fi": "Sarake",
+        "fr": "Colonne",
+        "it": "Colonna",
+        "ja": "列",
+        "ko": "칼럼",
+        "nb": "Kolonne",
+        "nl": "Kolom",
+        "pl": "Kolumna",
+        "pt-BR": "Coluna",
+        "pt-PT": "Coluna",
+        "sv": "Kolumn",
+        "th": "คอลัมน์",
+        "tr": "Sütun",
+        "vi": "Cột",
+        "zh-CN": "列",
+        "zh-TW": "欄"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "cs": "Obrázek",
+            "da": "Billede",
+            "de": "Bild",
+            "en": "Image",
+            "es": "Imagen",
+            "fi": "Kuva",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "ko": "이미지",
+            "nb": "Bilde",
+            "nl": "Afbeelding",
+            "pl": "Obraz",
+            "pt-BR": "Imagem",
+            "pt-PT": "Imagem",
+            "sv": "Bild",
+            "th": "รูปภาพ",
+            "tr": "Görsel",
+            "vi": "Hình ảnh",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
+          }
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "cs": "Nadpis",
+            "da": "Overskrift",
+            "de": "Titel",
+            "en": "Heading",
+            "es": "Título",
+            "fi": "Otsikko",
+            "fr": "En-tête",
+            "it": "Titolo",
+            "ja": "見出し",
+            "ko": "제목",
+            "nb": "Overskrift",
+            "nl": "Kop",
+            "pl": "Nagłówek",
+            "pt-BR": "Título",
+            "pt-PT": "Título",
+            "sv": "Rubrik",
+            "th": "หัวเรื่อง",
+            "tr": "Başlık",
+            "vi": "Tiêu đề",
+            "zh-CN": "标题",
+            "zh-TW": "標題"
+          },
+          "default": {
+            "cs": "Sloupec",
+            "da": "Kolonne",
+            "de": "Spalte",
+            "en": "Column",
+            "es": "Columna",
+            "fi": "Sarake",
+            "fr": "Colonne",
+            "it": "Colonna",
+            "ja": "列",
+            "ko": "칼럼",
+            "nb": "Kolonne",
+            "nl": "Kolom",
+            "pl": "Kolumna",
+            "pt-BR": "Coluna",
+            "pt-PT": "Coluna",
+            "sv": "Kolumn",
+            "th": "คอลัมน์",
+            "tr": "Sütun",
+            "vi": "Cột",
+            "zh-CN": "列",
+            "zh-TW": "欄"
+          }
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": {
+            "cs": "Podnadpis",
+            "da": "Underoverskrift",
+            "de": "Unter-Überschrift",
+            "en": "Subheading",
+            "es": "Subtítulo",
+            "fi": "Alaotsikko",
+            "fr": "Sous-titre",
+            "it": "Sottotitolo",
+            "ja": "小見出し",
+            "ko": "소제목",
+            "nb": "Underoverskrift",
+            "nl": "Subkop",
+            "pl": "Nagłówek podrzędny",
+            "pt-BR": "Subtítulo",
+            "pt-PT": "Subtítulo",
+            "sv": "Underrubrik",
+            "th": "หัวเรื่องย่อย",
+            "tr": "Alt başlık",
+            "vi": "Tiêu đề phụ",
+            "zh-CN": "副标题",
+            "zh-TW": "子標題"
+          },
+          "default": {
+            "cs": "<p>Informujte zákazníky prostřednictvím tohoto textu o své značce. Zároveň můžete popsat některý z produktů, oznámit důležité informace nebo přivítat zákazníky ve svém obchodě.</p>",
+            "da": "<p>Brug denne tekst til at dele oplysninger om dit brand med dine kunder. Beskriv et produkt, del meddelelser, eller byd kunder velkommen til din butik.</p>",
+            "de": "<p>Mit diesem Text kannst du deine Kunden über deine Marke informieren. Beschreibe ein Produkt, veröffentliche Ankündigungen oder begrüße Kunden in deinem Shop.</p>",
+            "en": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "es": "<p>Usa este texto para compartir información sobre tu marca con tus clientes. Describe un producto, comparte anuncios o recibe clientes en tu tienda.</p>",
+            "fi": "<p>Tämän tekstin avulla voit jakaa brändiäsi koskevia tietoja asiakkaille. Kuvaile tuotetta, jaa ilmoituksia tai toivota asiakkaat tervetulleiksi kauppaasi.</p>",
+            "fr": "<p>Utilisez ce texte pour partager des informations sur votre marque. Décrivez un produit, partagez des annonces ou souhaitez la bienvenue à vos clients dans votre boutique.</p>",
+            "it": "<p>Utilizza questo testo per condividere informazioni sul tuo brand con i clienti. Descrivi un prodotto, condividi gli annunci o dai il benvenuto ai clienti nel tuo negozio.</p>",
+            "ja": "<p>このテキストを使用して、ブランドに関する情報をお客様に共有します。商品を説明したり、告知の共有をしたり、ストアのお客様を歓迎したりします。</p>",
+            "ko": "<p>이 텍스트를 사용하여 고객과 브랜드에 대한 정보를 공유하십시오. 제품 설명이나 공지 사항을 공유하고 고객의 스토어 방문을 환영합니다.</p>",
+            "nb": "<p>Bruk denne teksten for å dele informasjon om merkevaren med kundene dine. Beskriv et produkt, del kunngjøringer eller ønsk kunder velkommen til butikken din.</p>",
+            "nl": "<p>Gebruik deze tekst om informatie over je merk te delen met je klanten. Beschrijf een product, deel aankondigingen of verwelkom klanten in je winkel.</p>",
+            "pl": "<p>Użyj tego tekstu, aby udostępnić klientom informacje o swojej marce. Opisz produkt, udostępnij ogłoszenia lub przywitaj klientów w swoim sklepie.</p>",
+            "pt-BR": "<p>Use o texto para compartilhar informações sobre a marca. Descreva um produto, divulgue comunicados ou dê as boas-vindas aos clientes.</p>",
+            "pt-PT": "<p>Utilize este texto para partilhar informações sobre a sua marca com seus clientes. Descreva um produto, partilhe comunicados ou receba clientes na sua loja.</p>",
+            "sv": "<p>Använd den här texten för att dela information om ditt varumärke med dina kunder. Beskriv en produkt, dela meddelanden eller välkomna kunder till din butik.</p>",
+            "th": "<p>ใช้ข้อความนี้เพื่อแชร์ข้อมูลเกี่ยวกับแบรนด์ของคุณให้ลูกค้าทราบ โดยอธิบายคุณสมบัติของสินค้า แชร์ประกาศ หรือกล่าวต้อนรับลูกค้าสู่ร้านค้าของคุณ</p>",
+            "tr": "<p>Müşterilerinizle markanız hakkında bilgi paylaşmak için bu metni kullanın. Ürün açıklaması girin, duyuru paylaşın veya mağazanıza gelen müşterileri karşılayın.</p>",
+            "vi": "<p>Sử dụng văn bản này để chia sẻ thông tin về thương hiệu của bạn với khách hàng. Mô tả sản phẩm, chia sẻ thông báo hoặc chào mừng khách hàng tới cửa hàng của bạn.</p>",
+            "zh-CN": "<p>使用此文本与您的客户分享有关您品牌的信息。描述产品、分享公告或欢迎客户访问您的商店。</p>",
+            "zh-TW": "<p>您可以用這段文字和顧客分享品牌資訊、描述產品、分享公告，或歡迎顧客光臨您的商店。</p>"
+          }
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "cs": "Více sloupců",
+        "da": "Flere kolonner",
+        "de": "Mehrere Spalten",
+        "en": "Multi-column",
+        "es": "Multicolumna",
+        "fi": "Monisarakkeinen",
+        "fr": "Multicolonnes",
+        "it": "Multicolonna",
+        "ja": "複数列",
+        "ko": "여러 칼럼",
+        "nb": "Flere kolonner",
+        "nl": "Meerdere kolommen",
+        "pl": "Wielokolumnowy",
+        "pt-BR": "Várias colunas",
+        "pt-PT": "Várias colunas",
+        "sv": "Flera kolumner",
+        "th": "หลายคอลัมน์",
+        "tr": "Çok sütunlu",
+        "vi": "Nhiều cột",
+        "zh-CN": "多列",
+        "zh-TW": "多欄位"
+      },
+      "category": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Bild",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

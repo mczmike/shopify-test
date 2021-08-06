@@ -1,22 +1,18 @@
-<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- assign selected_page = pages[section.settings.page] -%}
 
-<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
-
-<div class="page-width page-width--narrow">
-  <h2 class="page-title">
-    {%- if section.settings.page.title != blank -%}
-      {{ section.settings.page.title | escape }}
+<div class="page-section">
+  <h2 class="page-section__heading center">
+    {%- if selected_page.title != blank -%}
+      {{ selected_page.title }}
     {%- else -%}
-      Page title
+      {{ 'sections.page.placeholder_title' | t }}
     {%- endif -%}
   </h2>
   <div class="rte">
-    {%- if section.settings.page.content != blank -%}
-      {{ section.settings.page.content }}
+    {%- if selected_page.content != blank -%}
+      {{ selected_page.content }}
     {%- else -%}
-      <div class='page-placeholder-wrapper placeholder'>
+      <div class='page-placeholder-wrapper'>
         {{ 'page' | placeholder_svg_tag: 'page-placeholder' }}
       </div>
     {%- endif -%}
@@ -25,19 +21,106 @@
 
 {% schema %}
 {
-  "name": "t:sections.page.name",
-  "tag": "section",
-  "class": "spaced-section",
+  "name": {
+    "cs": "Stránka",
+    "da": "Side",
+    "de": "Seite",
+    "en": "Page",
+    "es": "Página",
+    "fi": "Sivu",
+    "fr": "Page",
+    "it": "Pagina",
+    "ja": "ページ",
+    "ko": "페이지",
+    "nb": "Side",
+    "nl": "Pagina",
+    "pl": "Strona",
+    "pt-BR": "Página",
+    "pt-PT": "Página",
+    "sv": "Sida",
+    "th": "หน้า",
+    "tr": "Sayfa",
+    "vi": "Trang",
+    "zh-CN": "页面",
+    "zh-TW": "頁面"
+  },
   "settings": [
     {
-      "type": "page",
       "id": "page",
-      "label": "t:sections.page.settings.page.label"
+      "type": "page",
+      "label": {
+        "cs": "Stránka",
+        "da": "Side",
+        "de": "Seite",
+        "en": "Page",
+        "es": "Página",
+        "fi": "Sivu",
+        "fr": "Page",
+        "it": "Pagina",
+        "ja": "ページ",
+        "ko": "페이지",
+        "nb": "Side",
+        "nl": "Pagina",
+        "pl": "Strona",
+        "pt-BR": "Página",
+        "pt-PT": "Página",
+        "sv": "Sida",
+        "th": "หน้า",
+        "tr": "Sayfa",
+        "vi": "Trang",
+        "zh-CN": "页面",
+        "zh-TW": "頁面"
+      }
     }
   ],
   "presets": [
     {
-      "name": "t:sections.page.presets.name"
+      "name": {
+        "cs": "Stránka",
+        "da": "Side",
+        "de": "Seite",
+        "en": "Page",
+        "es": "Página",
+        "fi": "Sivu",
+        "fr": "Page",
+        "it": "Pagina",
+        "ja": "ページ",
+        "ko": "페이지",
+        "nb": "Side",
+        "nl": "Pagina",
+        "pl": "Strona",
+        "pt-BR": "Página",
+        "pt-PT": "Página",
+        "sv": "Sida",
+        "th": "หน้า",
+        "tr": "Sayfa",
+        "vi": "Trang",
+        "zh-CN": "页面",
+        "zh-TW": "頁面"
+      },
+      "category": {
+        "cs": "Zapojení kupujících",
+        "da": "Køberinteraktion",
+        "de": "Käufer-Interaktion",
+        "en": "Buyer Engagement",
+        "es": "Interacción con el comprador",
+        "fi": "Ostajan sitoutuminen",
+        "fr": "Engagement des acheteurs",
+        "it": "Engagement degli acquirenti",
+        "ja": "購入者エンゲージメント",
+        "ko": "구매자 참여",
+        "nb": "Kjøpsengasjement",
+        "nl": "Betrokkenheid koper",
+        "pl": "Zaangażowanie kupującego",
+        "pt-BR": "Engajamento do comprador",
+        "pt-PT": "Interação com comprador",
+        "sv": "Köparengagemang",
+        "th": "การมีส่วนร่วมของผู้ซื้อ",
+        "tr": "Alıcı Etkileşimi",
+        "vi": "Mức độ tương tác của người mua",
+        "zh-CN": "买家参与度",
+        "zh-TW": "買家參與度"
+      }
     }
   ]
 }

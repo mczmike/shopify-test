@@ -1,0 +1,64 @@
+{%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+{%- if pick_up_availabilities.size > 0 -%}
+  <template data-store-availability-main-content>
+    <div class="store-availability store-availability-summary">
+      {%- liquid
+        assign closest_location = pick_up_availabilities.first
+
+        if closest_location.available
+          render 'icon-checkmark'
+        else
+          render 'icon-close-thick'
+        endif
+      -%}
+
+      <div class="store-availability-information">
+        {%- if closest_location.available -%}
+          <p class="store-availability__title">{{ 'sections.store_availability.pick_up_available_at_html' | t: location_name: closest_location.location.name }}</p>
+          <p class="store-availability__description">{{ closest_location.pick_up_time }}</p>
+          <button class="store-availability__button" aria-haspopup="dialog" data-store-availability-open-drawer>
+            {%- if pick_up_availabilities.size == 1 -%}
+              {{ 'sections.store_availability.view_store_info' | t }}
+            {%- else -%}
+              {{ 'sections.store_availability.check_other_stores' | t }}
+            {%- endif -%}
+          </button>
+        {%- else -%}
+          <p class="store-availability__title">{{ 'sections.store_availability.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}</p>
+          {%- if pick_up_availabilities.size > 1 -%}
+            <button class="store-availability__button" aria-haspopup="dialog" data-store-availability-open-drawer>{{ 'sections.store_availability.check_other_stores' | t }}</button>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </template>
+   <ul class="store-availability-list" role="list" data-store-availability-drawer-content>
+    {%- for availability in pick_up_availabilities -%}
+      <li class="store-availability-list__item">
+        <h3>{{ availability.location.name }}</h3>
+        <div>
+          {%- if availability.available -%}
+            {% render 'icon-checkmark' %} {{ 'sections.store_availability.pick_up_available' | t }}, {{ availability.pick_up_time | downcase }}
+          {%- else -%}
+            {% render 'icon-close-thick' %} {{ 'sections.store_availability.pick_up_currently_unavailable' | t }}
+          {%- endif -%}
+        </div>
+
+        {%- assign address = availability.location.address -%}
+        <address class="store-availability-list__address">
+          {{ address | format_address }}
+        </address>
+
+        {%- if address.phone.size > 0 -%}
+          <p>{{ address.phone }}</p>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+{% schema %}
+{
+  "name": {},
+  "settings": []
+}
+{% endschema %}
