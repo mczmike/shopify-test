@@ -7,3 +7,10 @@ gulp.task( 'sass', function()  {
       .pipe(sass())
       .pipe(gulp.dest('assets'))
   });
+
+  gulp.task('watch', function(){
+    gulp.watch('scss/**.scss', gulp.series('sass'))
+    themeKit.command('watch', {
+        env: 'development'
+    })  
+  });
