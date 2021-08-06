@@ -1,0 +1,31 @@
+{
+  "name": "vs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "love"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mczmike/shopify-test.git"
+  },
+  "keywords": [
+    "shopy"
+  ],
+  "author": "Mikhail Kostyunin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mczmike/shopify-test/issues"
+  },
+  "homepage": "https://github.com/mczmike/shopify-test#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.37.5"
+  },
+  "dependencies": {
+    "@shopify/themekit": "^1.1.9",
+    "update": "^0.7.4"
+  }
+}
